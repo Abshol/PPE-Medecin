@@ -1,6 +1,9 @@
 <script>
-    sessionStorage.setItem("connecte", "true")
+    sessionStorage.setItem("connecte", "false")
     if (sessionStorage.getItem("connecte") == "true") {
         window.location.href = "map/";
+    }
+    else {
+        window.location.href = "connexion/";
     }
 </script>

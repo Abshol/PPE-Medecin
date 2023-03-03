@@ -46,3 +46,7 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
+
+if (sessionStorage.getItem("connecte") == "false") {
+    window.location.href = "connexion/";
+}

@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $("#date").val(new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":")));
+    let dateInput = document.getElementById("date");
+    dateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
     
     const datetimeInput = document.querySelector('#date');
 

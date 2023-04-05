@@ -1,4 +1,4 @@
-sessionStorage.setItem("connecte", false)
+sessionStorage.setItem("connecte", 'true');
 
 
 var map = L.map('map').setView([48.822915, 2.271123], 14);
@@ -10,8 +10,8 @@ $(document).ready(function(){
         success: function(data) {
             $.each(data.records, function(i, doc) {
                 if (doc.fields.ville == "ISSY LES MOULINEAUX" && doc.fields.specialite == "MEDECIN GENERALISTE") {
-                    if (sessionStorage.getItem("connecte") == true) {
-                        var select = "<button>Réserver un rendez-vous</button>";
+                    if (sessionStorage.getItem("connecte") == 'true') {
+                        var select = "<button class='reserv' id='"+doc.fields.nom+"'>Réserver un rendez-vous</button>";
                     } else {
                         var select = "<br>Vous n'êtes pas connectés, <button id='connexion'>Se connecter</button>";
                     }
@@ -30,4 +30,9 @@ $(document).ready(function(){
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+    
+    $(document).on('click', '.reserv', function(event) {
+        sessionStorage.setItem("connecte", false)
+        window.location.href = "reserver/";
+    })
 });

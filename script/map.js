@@ -32,7 +32,8 @@ $(document).ready(function(){
     }).addTo(map);
     
     $(document).on('click', '.reserv', function(event) {
-        sessionStorage.setItem("connecte", false)
+        
+        sessionStorage.setItem("medecin", false)
         window.location.href = "reserver/";
     })
 });

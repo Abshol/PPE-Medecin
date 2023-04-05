@@ -17,8 +17,8 @@ $(document).ready(function() {
         if (continu) {
             $.ajax({
                 method: "POST",
-                url: "http://172.19.0.74/API",
-                data: JSON.stringify({nomPatient: nom, prenomPatient: prenom, ruePatient: rue, cpPatient: cp, villePatient: ville, telPatient: tel, loginPatient: login, mdpPatient: mdp})
+                url: "http://172.19.0.74/API/index.php?action=patient",
+                data: JSON.stringify({nom: nom, prenom: prenom, rue: rue, cp: cp, ville: ville, tel: tel, login: login, mdp: mdp}),
             })
             .done(function(data, textStatus, jqXHR) {
                 alert("Votre compte a bien été créé");

@@ -17,7 +17,7 @@ $(document).ready(function(){
                     }
                     console.log(doc.fields.geolocalisation);
                     var marker = L.marker(doc.fields.geolocalisation).addTo(map);
-                    marker.bindPopup("<b>"+doc.fields.specialite+"</b><br>"+doc.fields.civilite+" "+doc.fields.nom+"."+select).openPopup();
+                    marker.bindPopup("<h2>"+doc.fields.civilite+" "+doc.fields.nom+"</h2><br>"+doc.fields.specialite+"."+select).openPopup();
                 }
             });
         }
@@ -30,43 +30,4 @@ $(document).ready(function(){
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-
-    // var circle = L.circle([51.508, -0.11], {
-    //     color: 'red',
-    //     fillColor: '#f03', 
-    //     fillOpacity: 0.5,
-    //     radius: 500
-    // }).addTo(map);
-
-    // var polygon = L.polygon([
-    //     [51.509, -0.08],
-    //     [51.503, -0.06],
-    //     [51.51, -0.047]
-    // ]).addTo(map);
-
-    
-    // circle.bindPopup("I am a circle.");
-    // polygon.bindPopup("I am a polygon.");
-
-    // var popup = L.popup()
-    //     .setLatLng([51.513, -0.09])
-    //     .setContent("I am a standalone popup.")
-    //     .openOn(map);
-
-    function onMapClick(e) {
-        alert("You clicked the map at " + e.latlng);
-    }
-
-    map.on('click', onMapClick);
-
-    var popup = L.popup();
-
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);
-    }
-
-    map.on('click', onMapClick);
 });

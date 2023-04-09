@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
     crossorigin=""/>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style/style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../script/script.js"></script>
 </head>
 <body>
-    <div class="nav" id="nav"><a href='../'>Retour à la carte</a></div>
+    <div class="nav" id="navEmpty"><a href='../' class="button">Retour à la carte</a></div>
     <div class="form">
+        <div class="title"><h1>Inscription</h1></div>
         <input type="text" name="nom" id="nomPatient" placeholder="Votre nom">
         <input type="text" name="prenom" id="prenomPatient" placeholder="Votre prénom">
         <input type="text" name="rue" id="ruePatient" placeholder="Votre rue">
@@ -24,7 +25,7 @@
         <input type="text" name="login" id="loginPatient" placeholder="Identifiant">
         <input type="password" name="mdp" id="mdpPatient" placeholder="Mot de passe">
         <input type="button" value="S'inscrire" id="sub">
-        <a href="../connexion/"><input type="button" value="J'ai déjà un compte" name="log"></a>
+        <a href="../connexion/">J'ai déjà un compte</a>
     </div>
     <script src="../script/inscription.js"></script>
 </body>

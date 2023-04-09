@@ -2,3 +2,8 @@ Added connexion deconnexion support (Connexion still needs to be done API side)
 Multiple corrections in scripts
 Added global scripts in script.js to use everywhere (and global var)
 Changes done to html
+---
+Added randomly generated token
+---
+Added css 
+Gestion de si l'utilisateur est connecté ou pas pour les pages d'inscription et de connexion

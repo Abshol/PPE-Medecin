@@ -10,13 +10,13 @@ $(document).ready(function() {
             url: URIPATIENT+"&id="+sessionStorage.getItem("idUser"),
         })
         .done(function(data, textStatus, jqXHR) {
-            $("#nav").html("Vous êtes connecté en tant que: "+data.nomPatient+"<button id='deco'>Se deconnecter</button>");
+            $("#nav").prepend("<span>Vous êtes connecté en tant que: <strong>"+data.nomPatient+"</strong></span> <a id='deco' class='button'>Se déconnecter</a>");
             console.log(data); // Réponse HTTP (body)
             console.log(textStatus); // Statut de la requête AJAX
             console.log(jqXHR); // Objet jqXHR (infos de la requête AJAX)
         });
     } else {
-        $("#nav").html('<a href="./connexion/">Se Connecter</a><a href="./inscription/">S\'inscrire</a>');
+        $("#nav").prepend('<a href="./connexion/" class="button">Se Connecter</a><a href="./inscription/" class="button">S\'inscrire</a>');
     }
 
     $(document).on('click', '#deco' , function() {
@@ -25,3 +25,13 @@ $(document).ready(function() {
         location.reload();
     });
 });
+
+// Randomly generates a string to be used in a cookie
+function generateAuthToken(length) {
+    var token = "";
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < length; i++) {
+      token += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return token;
+  }

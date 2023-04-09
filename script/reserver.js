@@ -1,6 +1,6 @@
-if (typeof obj.foo !== 'undefined') {
-    // your code here
-  }
+if (typeof sessionStorage.getItem("connecte") != 'undefined' && sessionStorage.getItem("connecte") == true) {
+    window.location.href = "connexion/";
+}
 $(document).ready(function() {
     $("#date").val(new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":")));
     let dateInput = document.getElementById("date");

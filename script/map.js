@@ -1,6 +1,3 @@
-sessionStorage.setItem("connecte", 'true');
-
-
 var map = L.map('map').setView([48.822915, 2.271123], 14);
 $(document).ready(function(){
     $.ajax({
@@ -32,8 +29,8 @@ $(document).ready(function(){
     }).addTo(map);
     
     $(document).on('click', '.reserv', function(event) {
-        
-        sessionStorage.setItem("medecin", false)
-        window.location.href = "reserver/";
+        var id = $(this).attr('id'); // Retrieve the id of the clicked button
+        sessionStorage.setItem("medecin", id); // Store the id in session storage
+        window.location.href = "reserver/"; // Redirect to the reservation page
     })
 });

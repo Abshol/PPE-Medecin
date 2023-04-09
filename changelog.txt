@@ -1,0 +1,4 @@
+Added connexion deconnexion support (Connexion still needs to be done API side)
+Multiple corrections in scripts
+Added global scripts in script.js to use everywhere (and global var)
+Changes done to html

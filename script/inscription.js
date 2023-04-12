@@ -17,12 +17,12 @@ $(document).ready(function() {
         if (continu) {
             $.ajax({
                 method: "POST",
-                url: "http://localhost/medecin/API/index.php?action=patient",
+                url: URIPATIENT,
                 data: JSON.stringify({nom: nom, prenom: prenom, rue: rue, cp: cp, ville: ville, tel: tel, login: login, mdp: mdp}),
             })
             .done(function(data, textStatus, jqXHR) {
                 alert("Votre compte a bien été créé");
-                window.location.href = "connexion/";
+                window.location.href = "../connexion";
                 console.log(textStatus); // Statut de la requête AJAX
                 console.log(jqXHR); // Objet jqXHR (infos de la requête AJAX)
             })

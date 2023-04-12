@@ -7,3 +7,6 @@ Added randomly generated token
 ---
 Added css 
 Gestion de si l'utilisateur est connecté ou pas pour les pages d'inscription et de connexion
+---
+Added gestion of cookies
+Started dev of reservations

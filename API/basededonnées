@@ -1,0 +1,20 @@
+CREATE TABLE patient (idPatient INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+			nomPatient VARCHAR(100) NOT NULL,
+ 			prenomPatient VARCHAR(100) NOT NULL,
+ 			ruePatient VARCHAR(100) NOT NULL,
+ 			cpPatient VARCHAR(5) NOT NULL, villePatient VARCHAR(100) NOT NULL, telPatient VARCHAR(15) NOT NULL, loginPatient VARCHAR(100) NOT NULL,
+ 			mdpPatient VARCHAR(100) NOT NULL);
+CREATE TABLE rdv (idRdv INT PRIMARY KEY NOT NULL,
+			dateHeureRdv DATE NOT NULL,
+			idPatient INT NOT NULL,
+			idMedecin VARCHAR(50) NOT NULL,
+			FOREIGN KEY (idPatient) REFERENCES patient(idPatient));
+CREATE TABLE authentification(token VARCHAR(32) PRIMARY KEY NOT NULL,
+			idPatient INT NOT NULL,
+			ipAppareil VARCHAR(15) NOT NULL,
+			FOREIGN KEY (idPatient) REFERENCES patient(idPatient));
+
+NOM UTILISATEUR : MEDECINS
+MDP : O3G8RbqPSlEPuCMF
+
+BDD : MEDECINS

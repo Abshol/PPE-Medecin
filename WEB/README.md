@@ -1,4 +1,4 @@
 # PPE-Medecin-FRONT
 Code front-end de l'application PPE-Medecin
 
-C'est une application permettant à des utilisateurs connectés de pouvoir réserver des rendez-vous avec des médecins sur la ville d'Issy-les-Moulineaux
+L'adresse de l'API se trouve dans la variable URI déclarée au début du code du fichier script.js

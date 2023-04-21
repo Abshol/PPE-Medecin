@@ -13,8 +13,3 @@ CREATE TABLE authentification(token VARCHAR(32) PRIMARY KEY NOT NULL,
 			idPatient INT NOT NULL,
 			ipAppareil VARCHAR(15) NOT NULL,
 			FOREIGN KEY (idPatient) REFERENCES patient(idPatient));
-
-NOM UTILISATEUR : MEDECINS
-MDP : O3G8RbqPSlEPuCMF
-
-BDD : MEDECINS

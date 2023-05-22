@@ -1,0 +1,14 @@
+Ces deux scripts .bat font une exportation et une importation d'une db, le code reste globalement le même à une exception:
+Pour l'import il faut utiliser mysql.exe et non mysqldump
+
+Le texte %date:/=% permet de rajouter la date au fichier de sauvegarde
+
+Pour changer l'utilisateur il faut modifier ce qui se situe après le -u, puis renseigner son mot de passe après -p
+Le nom qui vient après est celui de la base de données à utiliser
+
+Pour la compression j'ai utilisé l'algorithme gzip utilisé par windows via la commande "compact" qui permet de compresser rapidement et efficacement un fichier
+Ce format de compression est d'ailleurs plus ergonomique car il ne nécessite aucun logiciel pour être ouvert tout comme le format .zip
+
+J'ai laissé en commentaire des lignes pour pouvoir changer vers le format .zip car ce format a aussi ses bénéfices car il est plus flexible et permet de faire des choses comme mettre un mot de passe ou d'extraire les fichiers un à un s'ils sont plusieurs dans l'archive
+
+La grande différence qui me fit choisir compact est le fait que sa compression est plus efficace que le zip, faisant que le fichier pèse beaucoup moins lourd sur le système.

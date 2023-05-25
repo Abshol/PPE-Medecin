@@ -58,16 +58,6 @@ class authentification {
 
         return $id;
     }
-
-    public function verifIP($ip){
-
-        if ($_SERVER['REMOTE_ADDR'] != $ip) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
 }
 
 ?>

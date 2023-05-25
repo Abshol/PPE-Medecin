@@ -2,6 +2,7 @@ var URI = "http://localhost/API/index.php?";
 var URIPATIENT = URI+"action=patient";
 var URIRDV = URI+"action=rdv";
 var URICONNECT = URI+"action=authentification";
+var URICOOKIE = URI+"action=cookie";
 
 $(document).ready(function() {
 
@@ -11,6 +12,11 @@ $(document).ready(function() {
         $('.focus').click();    
       }
     }); 
+    $.ajax({
+        method: "GET",
+        url: URICOOKIE+"&token="+getCookie("token"),
+
+    })
     if (getCookie("connecte") == 'true') {
       $.ajax({
         method: "GET",

@@ -19,6 +19,7 @@ require("view/vue.php");
 require("model/authentification.php");
 require("model/patient.php");
 require("model/rdv.php");
+require("model/cookie.php");
 
 // Routes et méthodes HTTP associées
 if(isset($_GET["action"])) {
@@ -74,7 +75,23 @@ if(isset($_GET["action"])) {
 					break;
 			}
 			break;
-		
+        
+        case "cookie":
+            switch ($_SERVER["REQUEST_METHOD"]) {
+                case 'GET':
+                    (new controller)->cookieConnexion();
+                    break;
+                case 'POST':
+                    (new controller)->cookieCreate();
+                    break;
+                case 'DELETE':
+                    (new controller)->cookieDelete();
+                    break;
+                default:
+                    (new controller)->erreur404();
+                    break;
+            }
+        break;
 		// Route par défaut : erreur 404
 		default:
 			(new controller)->erreur404();

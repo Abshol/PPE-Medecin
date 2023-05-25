@@ -259,8 +259,8 @@ class controller {
             $attributsRequis = array("id");
             
             if ($this->verifierAttributsJson($donnees, $attributsRequis)) {
-                if ((new RendezVous)->exists($donnees->id)) {
-                    $resultat = (new RendezVous)->delete($donnees->id);
+                if ((new rdv)->exists($donnees->id)) {
+                    $resultat = (new rdv)->delete($donnees->id);
         
                     if ($resultat != false) {
                         http_response_code(200);
@@ -319,7 +319,96 @@ class controller {
 
         (new Vue)->transformerJson($renvoi);
     }
+
+    public function cookieConnexion() {
+        $renvoi = null;
+        if(isset($_GET['token'])) {
+            $token = $_GET['token'];
+            if ((new cookie)->exists($token)) {
+                $resultat = (new cookie)->getAuth($token);
+
+                if ($resultat != false) {
+                    http_response_code(200);
+                    $renvoi = array("message" => "Connexion effectuée avec succès", "nomPatient" => $resultat[0]['nomPatient'], "prenomPatient" => $resultat[0]['prenomPatient']);
+                } else {
+                    http_response_code(500);
+                        $renvoi = array("message" => "Une erreur interne est survenue");
+                }
+            } else {
+                http_response_code(400);
+                $renvoi = array(
+                    "message" => "Pas de token"
+                );
+            }
+        }
+        (new Vue)->transformerJson($renvoi);
+    }
+
+    public function cookieCreate() {
+        $donnees = json_decode(file_get_contents("php://input"));
+        $renvoi = null;
     
+        if ($donnees === null) {
+            http_response_code(400);
+            $renvoi = array("message" => "JSON envoyé incorrect");
+        } else {
+            $attributsRequis = array("token", "idPatient");
+
+            if($this->verifierAttributsJson($donnees, $attributsRequis)) {
+                $resultat = (new cookie)->createAuth($donnees->token, $donnees->idPatient);
+                
+                if ($resultat != false) {
+                    http_response_code(200);
+                    $renvoi = array("message" => "Connexion effectuée avec succès");
+                } else {
+                    http_response_code(500);
+                        $renvoi = array("message" => "Une erreur interne est survenue");
+                }
+            } else {
+                http_response_code(400);
+                    $renvoi = array(
+                        "message" => "Données manquantes"
+                    );
+            }
+        }
+        (new Vue)->transformerJson($renvoi);
+    }
+
+    public function cookieDelete() {
+        $donnees = json_decode(file_get_contents("php://input"));
+        $renvoi = null;
+        
+        if ($donnees === null) {
+            http_response_code(400);
+            $renvoi = array("message" => "JSON envoyé incorrect");
+        } else {
+            $attributsRequis = array("idPatient", "token");
+            
+            if ($this->verifierAttributsJson($donnees, $attributsRequis)) {
+                if ((new cookie)->exists($donnees->token)) {
+                    $resultat = (new cookie)->deleteAuth($donnees->token, $donnees->idPatient);
+        
+                    if ($resultat != false) {
+                        http_response_code(200);
+                        $renvoi = array("message" => "Suppression effectuée avec succès");
+                    } else {
+                        http_response_code(500);
+                        $renvoi = array("message" => "Une erreur interne est survenue");
+                    }
+                } else {
+                    http_response_code(400);
+                    $renvoi = array(
+                        "message" => "Le cookie spécifié n'existe pas"
+                    );
+                }
+            } else {
+                http_response_code(400);
+                $renvoi = array("message" => "Données manquantes");
+            }
+        }
+    
+        (new vue)->transformerJson($renvoi);
+    }
 }
 
 ?>

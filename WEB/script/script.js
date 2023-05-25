@@ -1,44 +1,38 @@
-var URI = "http://localhost/API/index.php?";
+var URI = "http://localhost/medecins/PPE-Medecin/API/index.php?";
 var URIPATIENT = URI+"action=patient";
 var URIRDV = URI+"action=rdv";
 var URICONNECT = URI+"action=authentification";
 var URICOOKIE = URI+"action=cookie";
+var CONNECTE = false;
+
+$.ajax({
+    method: "GET",
+    url: URICOOKIE+"&token="+getCookie("token"),
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log(data);
+    var NOMPATIENT = data.nomPatient;
+    var PRENOMPATIENT = data.prenomPatient;
+    var IDPATIENT = data.loginPatient;
+    CONNECTE = true;
+    $("#nav").prepend("<span>Vous êtes connecté en tant que: <strong>"+NOMPATIENT+"</strong></span> <a id='deco' class='button'>Se déconnecter</a>");
+})
+.fail(function() {
+    $("#nav").prepend('<a href="./connexion/" class="button">Se Connecter</a><a href="./inscription/" class="button">S\'inscrire</a>');
+})
+
+$(document).on('click', '#deco' , function() {
+    document.cookie = 'token=0;path=/; max-age=-999999999';
+    location.reload();
+});
 
 $(document).ready(function() {
-
     $(document).on("keydown", '#focusInput', function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
         $('.focus').click();    
       }
     }); 
-    $.ajax({
-        method: "GET",
-        url: URICOOKIE+"&token="+getCookie("token"),
-
-    })
-    if (getCookie("connecte") == 'true') {
-      $.ajax({
-        method: "GET",
-        url: URIPATIENT+"&id="+getCookie("user"),
-      })
-      .done(function(data, textStatus, jqXHR) {
-          $("#nav").prepend("<span>Vous êtes connecté en tant que: <strong>"+data.nomPatient+"</strong></span> <a id='deco' class='button'>Se déconnecter</a>");
-          console.log(data); // Réponse HTTP (body)
-          console.log(textStatus); // Statut de la requête AJAX
-          console.log(jqXHR); // Objet jqXHR (infos de la requête AJAX)
-      });
-    } else {
-      $("#nav").prepend('<a href="./connexion/" class="button">Se Connecter</a><a href="./inscription/" class="button">S\'inscrire</a>');
-    }
-
-    $(document).on('click', '#deco' , function() {
-        sessionStorage.setItem("connecte", false);
-        sessionStorage.setItem("idUser", false);
-        document.cookie = 'connecte=false;path=/; max-age=-999999999';
-        document.cookie = 'user=0;path=/; max-age=-999999999';
-        location.reload();
-    });
 });
 
 // Randomly generates a string to be used in a cookie

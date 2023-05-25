@@ -24,20 +24,20 @@ class patient
     }
 
     public function getPatient($id){
-        $sql = "SELECT * FROM patient where idPatient = :id";
+        $sql = "SELECT * FROM patient where loginPatient = :id";
 
         $req = $this->pdo->prepare($sql);
-        $req->bindParam(':id', $id, PDO::PARAM_INT);
+        $req->bindParam(':id', $id, PDO::PARAM_STR);
         $req->execute();
 
         return $req->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function exists($id){
-        $sql = "SELECT COUNT(*) AS nb FROM patient where idPatient = :id";
+        $sql = "SELECT COUNT(*) AS nb FROM patient where loginPatient = :id";
 
         $req = $this->pdo->prepare($sql);
-        $req->bindParam(':id', $id, PDO::PARAM_INT);
+        $req->bindParam(':id', $id, PDO::PARAM_STR);
         $req->execute();
 
         $nb = $req->fetch(\PDO::FETCH_ASSOC)["nb"];
@@ -75,10 +75,9 @@ class patient
     }
 
     public function update($id, $nom, $prenom, $rue, $cp, $ville, $tel, $login, $mdp) {
-		$sql = "UPDATE patient SET nomPatient = :nom, prenomPatient = :prenom, ruePatient = :rue, cpPatient = :cp, villePatient = :ville, telPatient = :tel, loginPatient = :login, mdpPatient = :mdp WHERE idPatient = :id";
+		$sql = "UPDATE patient SET nomPatient = :nom, prenomPatient = :prenom, ruePatient = :rue, cpPatient = :cp, villePatient = :ville, telPatient = :tel, loginPatient = :login, mdpPatient = :mdp WHERE loginPatient = :id";
 		
 		$req = $this->pdo->prepare($sql);
-        $req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->bindParam(':nom', $nom, PDO::PARAM_STR);
         $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
         $req->bindParam(':rue', $rue, PDO::PARAM_STR);
@@ -92,10 +91,10 @@ class patient
 	}
 
 	public function delete($id) {
-		$sql = "DELETE FROM patient WHERE idPatient = :id";
+		$sql = "DELETE FROM patient WHERE loginPatient = :id";
 		
 		$req = $this->pdo->prepare($sql);
-		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->bindParam(':id', $id, PDO::PARAM_STR);
 		return $req->execute();
 	}
 }

@@ -1,21 +1,9 @@
-if (sessionStorage.getItem("connecte") == true) {
-    window.location.href = "../";
-}
-
 $(document).ready(function() {
 
     $(document).on("click", "#connexion", function(event) {
         var log = $("#name").val();
         var pass = $("#pass").val();
-        console.log(log);
-        if (log == "login" && pass == "12345") {
-            window.location.href = "../";
-            var idUser = "1";
-            var auth = generateAuthToken(32);
-
-        } else {
-            alert("Login ou mot de passe incorrect.");
-        }
+        var auth = generateAuthToken(32);
 
         $.ajax({
             method: "POST",
@@ -24,17 +12,20 @@ $(document).ready(function() {
         })
         .done(function(data, textStatus, jqXHR) {
             document.cookie = 'token='+auth+"; path=/; max-age=31536000;";
+            console.log(data);
             $.ajax({
                 method: "POST",
                 url: URICOOKIE,
-                data: JSON.stringify({login: log, mdp: pass}),
+                data: JSON.stringify({token: auth, idPatient: log}),
             })
-            console.log(data); // Réponse HTTP (body)
-            console.log(textStatus); // Statut de la requête AJAX
-            console.log(jqXHR); // Objet jqXHR (infos de la requête AJAX)
+            .done(function(data, textStatus, jqXHR) {
+                console.log(data); // Réponse HTTP (body)
+                console.log(textStatus); // Statut de la requête AJAX
+                console.log(jqXHR); // Objet jqXHR (infos de la requête AJAX)
+                window.location.href = "../";
+            })
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
-            alert("Erreur lors de l'envoi des données");
             if (jqXHR.status === 404) {
                 // Handle 404 error
                 alert("The requested page was not found.");

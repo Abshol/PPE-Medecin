@@ -292,12 +292,11 @@ class controller {
             http_response_code(400);
             $renvoi = array("message" => "JSON envoyé incorrect");
         } else {
-            $attributsRequis = array("idPatient", "login", "mdp");
+            $attributsRequis = array("login", "mdp");
 
             if($this->verifierAttributsJson($donnees, $attributsRequis)) {
-                if ((new patient)->exists($donnees->idPatient)) {
+                if ((new patient)->exists($donnees->login)) {
                     $resultat = (new authentification)->connexion($donnees->login, $donnees->mdp);
-
                     if ($resultat != false) {
                         http_response_code(200);
                         $renvoi = array("message" => "Connexion effectuée avec succès");
@@ -326,7 +325,6 @@ class controller {
             $token = $_GET['token'];
             if ((new cookie)->exists($token)) {
                 $resultat = (new cookie)->getAuth($token);
-
                 if ($resultat != false) {
                     http_response_code(200);
                     $renvoi = array("message" => "Connexion effectuée avec succès", "nomPatient" => $resultat[0]['nomPatient'], "prenomPatient" => $resultat[0]['prenomPatient']);

@@ -1,6 +1,3 @@
-if (sessionStorage.getItem("connecte") != 'true') {
-    window.location.href = "../";
-}
 $(document).ready(function() {
     $("#date").val(new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":")));
     let dateInput = document.getElementById("date");

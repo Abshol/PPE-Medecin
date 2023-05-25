@@ -59,7 +59,7 @@ class rdv {
         
         $req = $this->pdo->prepare($sql);
         $req->bindParam(':dateRdv', $dateRdv, PDO::PARAM_STR);
-        $req->bindParam(':idPatient', $idPatient, PDO::PARAM_INT);
+        $req->bindParam(':idPatient', $idPatient, PDO::PARAM_STR);
         $req->bindParam(':idMedecin', $idMedecin, PDO::PARAM_STR);
     
         if ($req->execute()) {
@@ -79,7 +79,7 @@ class rdv {
         $req = $this->pdo->prepare($sql);
         $req->bindParam(':id', $id, PDO::PARAM_INT);
         $req->bindParam(':dateRdv', $dateRdv, PDO::PARAM_STR);
-        $req->bindParam(':idPatient', $idPatient, PDO::PARAM_INT);
+        $req->bindParam(':idPatient', $idPatient, PDO::PARAM_STR);
         $req->bindParam(':idMedecin', $idMedecin, PDO::PARAM_INT);
         $req->execute();
     

@@ -21,7 +21,7 @@ class cookie
         
         $req = $this->pdo->prepare($sql);
         $req->bindParam(':token', $token, PDO::PARAM_STR);
-        $req->bindParam(':ip', $ip, PDO::PARAM_INT);
+        $req->bindParam(':ip', $ip, PDO::PARAM_STR);
         $req->execute();
 
         $nb = $req->fetch(\PDO::FETCH_ASSOC)["nb"];
@@ -36,11 +36,11 @@ class cookie
         if ($ip === null) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
-        $sql = "SELECT * FROM patient INNER JOIN authentification ON patient.idPatient = authentification.idPatient WHERE token = :token AND ipAppareil = :ip";
+        $sql = "SELECT * FROM patient INNER JOIN authentification ON patient.loginPatient = authentification.idPatient WHERE token = :token AND ipAppareil = :ip";
     
         $req = $this->pdo->prepare($sql);
         $req->bindParam(':token', $token, PDO::PARAM_STR);
-        $req->bindParam(':ip', $ip, PDO::PARAM_INT);
+        $req->bindParam(':ip', $ip, PDO::PARAM_STR);
         $req->execute();
         return $req->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -53,8 +53,8 @@ class cookie
 
         $req = $this->pdo->prepare($sql);
         $req->bindParam(':token', $token, PDO::PARAM_STR);
-        $req->bindParam(':ip', $ip, PDO::PARAM_INT);
-        $req->bindParam(':id', $idPatient, PDO::PARAM_INT);
+        $req->bindParam(':ip', $ip, PDO::PARAM_STR);
+        $req->bindParam(':id', $idPatient, PDO::PARAM_STR);
         return ($req->execute());
     }
 
@@ -66,8 +66,8 @@ class cookie
 
         $req = $this->pdo->prepare($sql);
         $req->bindParam(':token', $token, PDO::PARAM_STR);
-        $req->bindParam(':ip', $ip, PDO::PARAM_INT);
-        $req->bindParam(':id', $idPatient, PDO::PARAM_INT);
+        $req->bindParam(':ip', $ip, PDO::PARAM_STR);
+        $req->bindParam(':id', $idPatient, PDO::PARAM_STR);
         return ($req->execute());
     }
 }

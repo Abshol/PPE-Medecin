@@ -7,7 +7,7 @@ $(document).ready(function(){
         success: function(data) {
             $.each(data.records, function(i, doc) {
                 if (doc.fields.ville == "ISSY LES MOULINEAUX" && doc.fields.specialite == "MEDECIN GENERALISTE") {
-                    if (getCookie("connecte") == 'true') {
+                    if (CONNECTE == true) {
                         var select = "<button class='reserv' id='"+doc.fields.civilite+" "+doc.fields.nom+"'>Réserver un rendez-vous</button>";
                     } else {
                         var select = "<br>Vous n'êtes pas connectés, <button id='connexion'>Se connecter</button>";

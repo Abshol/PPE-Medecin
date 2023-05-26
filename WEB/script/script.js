@@ -10,14 +10,14 @@ $.ajax({
     url: URICOOKIE+"&token="+getCookie("token"),
 })
 .done(function(data, textStatus, jqXHR) {
-    console.log(data);
     var NOMPATIENT = data.nomPatient;
     var PRENOMPATIENT = data.prenomPatient;
-    var IDPATIENT = data.loginPatient;
-    CONNECTE = true;
+    sessionStorage.setItem("idPatient", data.loginPatient); // Store the id in session storage
+    sessionStorage.setItem("connecte", "true");
     $("#nav").prepend("<span>Vous êtes connecté en tant que: <strong>"+NOMPATIENT+"</strong></span> <a id='deco' class='button'>Se déconnecter</a>");
 })
 .fail(function() {
+    sessionStorage.setItem("connecte", "false");
     $("#nav").prepend('<a href="./connexion/" class="button">Se Connecter</a><a href="./inscription/" class="button">S\'inscrire</a>');
 })
 

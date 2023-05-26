@@ -159,7 +159,7 @@ class controller {
             }
             else {
                 http_response_code(404);
-                $donnees = array("message" => "Machine introuvable");
+                $donnees = array("message" => "Rdv introuvable");
             }
         }
         else {
@@ -183,16 +183,22 @@ class controller {
             $attributsRequis = array("dateHeureRdv", "idPatient", "idMedecin");
             if($this->verifierAttributsJson($donnees, $attributsRequis)) {
                 if(!empty($donnees->dateHeureRdv) && !empty($donnees->idPatient) && !empty($donnees->idMedecin)){
-                    $resultat = (new rdv)->setRdv($donnees->dateHeureRdv, $donnees->idPatient, $donnees->idMedecin);
+                    if (!(new rdv)->alreadyExists($donnees->dateHeureRdv, $donnees->idMedecin)) {
+                        $resultat = (new rdv)->setRdv($donnees->dateHeureRdv, $donnees->idPatient, $donnees->idMedecin);
     
-                    if($resultat !== false) {
-                        http_response_code(201);
-                        $renvoi = array("message" => "Ajout effectué avec succès", "idRdv" => $resultat);
+                        if($resultat !== false) {
+                            http_response_code(201);
+                            $renvoi = array("message" => "Ajout effectué avec succès", "idRdv" => $resultat);
+                        }
+                        else {
+                            http_response_code(500);
+                            $renvoi = array("message" => "Une erreur interne est survenue");
+                        }
+                    } else {
+                        http_response_code(409);
+                        $renvoi = array("message" => "L'heure de rdv est déjà prise");
                     }
-                    else {
-                        http_response_code(500);
-                        $renvoi = array("message" => "Une erreur interne est survenue");
-                    }
+                    
                 }
                 else {
                     http_response_code(400);
@@ -327,7 +333,7 @@ class controller {
                 $resultat = (new cookie)->getAuth($token);
                 if ($resultat != false) {
                     http_response_code(200);
-                    $renvoi = array("message" => "Connexion effectuée avec succès", "nomPatient" => $resultat[0]['nomPatient'], "prenomPatient" => $resultat[0]['prenomPatient']);
+                    $renvoi = array("message" => "Connexion effectuée avec succès", "nomPatient" => $resultat[0]['nomPatient'], "prenomPatient" => $resultat[0]['prenomPatient'], "loginPatient" => $resultat[0]['loginPatient']);
                 } else {
                     http_response_code(500);
                         $renvoi = array("message" => "Une erreur interne est survenue");

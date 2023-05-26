@@ -53,6 +53,24 @@ class rdv {
         }
     }
 
+    public function alreadyExists($date, $idMedecin){
+
+        $sql = "SELECT COUNT(*) AS nb FROM rdv where dateHeureRdv = :date AND idMedecin = :medecin";
+
+        $req = $this->pdo->prepare($sql);
+        $req->bindParam(':date', $date, PDO::PARAM_STR);
+        $req->bindParam(':medecin', $idMedecin, PDO::PARAM_STR);
+        $req->execute();
+
+        $nb = $req->fetch(\PDO::FETCH_ASSOC)["nb"];
+        if ($nb == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public function setRdv($dateRdv, $idPatient, $idMedecin){
     
         $sql = "INSERT INTO rdv (dateHeureRdv, idPatient, idMedecin) VALUES (:dateRdv, :idPatient, :idMedecin)";

@@ -20,21 +20,27 @@ $(document).ready(function() {
 
     $(document).on('click', '#reserver', function() {
         var dateRdv = $("#date").val().replace("T", " ");
-        var idPatient = getCookie('user');
         var med = sessionStorage.getItem('medecin');
-        console.log(dateRdv);
-        console.log(idPatient);
-        console.log(med);
+        var idpat = sessionStorage.getItem('idPatient');
         $.ajax({
             method: "POST",
             url: URIRDV,
-            data: JSON.stringify({dateHeureRdv: dateRdv, idPatient: idPatient, idMedecin: med}),
+            data: JSON.stringify({dateHeureRdv: dateRdv, idPatient: idpat, idMedecin: med}),
           })
           .done(function(data, textStatus, jqXHR) {
-              $("#nav").prepend("<span>Vous êtes connecté en tant que: <strong>"+data.nomPatient+"</strong></span> <a id='deco' class='button'>Se déconnecter</a>");
-              console.log(data); // Réponse HTTP (body)
-              console.log(textStatus); // Statut de la requête AJAX
-              console.log(jqXHR); // Objet jqXHR (infos de la requête AJAX)
+            alert("Votre rendez-vous a bien été enregistré !")
+          })
+          .fail(function() {
+            if (jqXHR.status === 409) {
+                // Handle 404 error
+                alert("L'heure de ce rendez-vous est déjà prise");
+            } else if (jqXHR.status === 500) {
+                // Handle 500 error
+                alert("Une erreur interne est survenue");
+            } else {
+                // Handle other errors
+                alert("Une erreur est survenue.");
+            }
           });
     })
 });

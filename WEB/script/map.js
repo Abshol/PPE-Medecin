@@ -1,5 +1,8 @@
 var map = L.map('map').setView([48.822915, 2.271123], 14);
 $(document).ready(function(){
+    if (sessionStorage.getItem('connecte') === "true") {
+        $('#nav').prepend("<a href=\"./rendez-vous/\" class=\"button\">Gérer mes rendez-vous</a>");
+    }
     $.ajax({
         method: "GET",
         url: "https://data.issy.com/api/records/1.0/search/?dataset=medecins-generalistes-et-infirmiers&q=&rows=10000",

@@ -31,10 +31,10 @@ $(document).ready(function() {
                 alert("The requested page was not found.");
             } else if (jqXHR.status === 500) {
                 // Handle 500 error
-                alert("Internal Server Error. Please try again later.");
+                alert("Une erreur interne est survenue");
             } else {
                 // Handle other errors
-                alert("An error occurred. Please try again later.");
+                alert("Une erreur est survenue.");
             }
             console.log(jqXHR); // Objet jqXHR (infos de la requête AJAX)
             console.log(textStatus); // Statut de la requête AJAX

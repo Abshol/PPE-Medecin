@@ -14,16 +14,21 @@
 </head>
 <body>
     <div class="nav" id="nav"><a href='../' class="button">Retour à la carte</a></div>
-    <a href="../rendez-vous/" class="button">Gérer mes rendez-vous</a>
-    <div class="reserv">
-        <div class="form">
-            <div class="title"><h1>Reserver un rendez-vous</h1></div>
-            <strong><div id="medecin"></div></strong>
-            <p>Choisissez la date qui vous correspondra le mieux (Incrémentations de 20 minutes)</p>
-            <input type="datetime-local" name="" id="date">
-            <input type="button" value="Reserver" id="reserver">
-        </div>
+
+    <div class="form">
+        <div class="title"><h1>Gérer mes rendez-vous</h1></div>
+        <table id="rendezvous">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Médecin</th>
+                    <th colspan='2' width="200px"><button id="recharger"><img src="../style/reload10x10.png"></button></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
 </body>
-<script src="../script/reserver.js"></script>
+<script src="../script/rendezvous.js"></script>
 </html>

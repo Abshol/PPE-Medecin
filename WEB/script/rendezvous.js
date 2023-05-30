@@ -34,7 +34,7 @@ $(document).ready(function() {
         $('#rendezvous').find('tbody').empty();
         $.ajax({
             method: "GET",
-            url: URIRDV,
+            url: URIRDV+"&idPatient="+sessionStorage.getItem('idPatient'),
             dataType: "json",
             success: function(data) {
                 // Define an empty array to store trs in

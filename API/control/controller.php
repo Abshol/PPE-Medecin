@@ -164,7 +164,7 @@ class controller {
         }
         else {
             http_response_code(200);
-            $donnees = (new rdv)->getAll();
+            $donnees = (new rdv)->getAll($_GET['idPatient']);
         }
         
         (new vue)->transformerJson($donnees);
@@ -262,11 +262,11 @@ class controller {
             http_response_code(400);
             $renvoi = array("message" => "JSON envoyé incorrect");
         } else {
-            $attributsRequis = array("id");
+            $attributsRequis = array("idRdv");
             
             if ($this->verifierAttributsJson($donnees, $attributsRequis)) {
-                if ((new rdv)->exists($donnees->id)) {
-                    $resultat = (new rdv)->delete($donnees->id);
+                if ((new rdv)->exists($donnees->idRdv)) {
+                    $resultat = (new rdv)->delete($donnees->idRdv);
         
                     if ($resultat != false) {
                         http_response_code(200);

@@ -15,11 +15,12 @@ class rdv {
 		}
 	}
 
-    public function getAll() {
+    public function getAll($idPatient) {
 
-        $sql = "SELECT * FROM rdv";
+        $sql = "SELECT * FROM rdv WHERE idPatient = :idPatient AND dateHeureRdv > CURDATE()";
 
         $req = $this->pdo->prepare($sql);
+        $req->bindParam(':idPatient', $idPatient, PDO::PARAM_STR);
         $req->execute();
 
         return $req->fetchAll(\PDO::FETCH_ASSOC);

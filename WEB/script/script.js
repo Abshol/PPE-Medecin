@@ -3,7 +3,7 @@ var URIPATIENT = URI+"action=patient";
 var URIRDV = URI+"action=rdv";
 var URICONNECT = URI+"action=authentification";
 var URICOOKIE = URI+"action=cookie";
-var CONNECTE = false;
+var CONNECTE;
 
 $.ajax({
     method: "GET",
@@ -18,7 +18,7 @@ $.ajax({
 })
 .fail(function() {
     sessionStorage.setItem("connecte", "false");
-    $("#nav").prepend('<a href="./connexion/" class="button">Se Connecter</a><a href="./inscription/" class="button">S\'inscrire</a>');
+    $("#nav").prepend('<a href="'+RACINE+'connexion/" class="button">Se Connecter</a><a href="'+RACINE+'inscription/" class="button">S\'inscrire</a>');
 })
 
 $(document).on('click', '#deco' , function() {
